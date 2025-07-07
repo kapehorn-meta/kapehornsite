@@ -18,7 +18,9 @@
 
 .navbar-logo {
   height: 32px;
-  width: 120px;
+  width: auto;
+  max-width: none;
+  display: block;
 }
 
 .navbar-menu {
