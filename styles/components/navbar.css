@@ -19,7 +19,8 @@
 .navbar-logo {
   height: 32px;
   width: auto;
-  object-fit: contain;
+  max-width: none;
+  display: block;
 }
 
 .navbar-menu {
