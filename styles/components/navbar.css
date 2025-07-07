@@ -45,21 +45,31 @@
   display: none;
   background: none;
   border: none;
-  font-size: 48px;
+  font-size: 28px;
   color: #111;
   cursor: pointer;
   position: absolute;
-  right: 24px;
+  right: 20px;
   top: 50%;
   transform: translateY(-50%);
   z-index: var(--z-mobile-toggle);
-  padding: var(--spacing-sm);
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color var(--transition-fast);
+}
+
+.navbar-hamburger:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.navbar-hamburger .material-symbols-outlined {
+  font-size: 28px;
 }
 
 .navbar-mobile-menu {
   display: none;
   position: fixed;
-  top: 60px;
+  top: 68px;
   right: 0;
   width: 70vw;
   max-width: 320px;
@@ -81,4 +91,98 @@
 
 .navbar-mobile-menu a:last-child {
   border-bottom: none;
+}
+
+/* Tablet Responsive */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 16px 20px;
+  }
+  
+  .navbar-logo {
+    height: 28px;
+  }
+  
+  .navbar-menu { 
+    display: none; 
+  }
+  
+  .navbar-hamburger { 
+    display: block;
+    font-size: 32px;
+    right: 16px;
+    padding: 10px;
+  }
+  
+  .navbar-hamburger .material-symbols-outlined {
+    font-size: 32px;
+  }
+  
+  .navbar-mobile-menu {
+    top: 60px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .navbar {
+    padding: 14px 16px;
+  }
+  
+  .navbar-logo {
+    height: 24px;
+  }
+  
+  .navbar-hamburger {
+    font-size: 36px;
+    right: 12px;
+    padding: 12px;
+  }
+  
+  .navbar-hamburger .material-symbols-outlined {
+    font-size: 36px;
+  }
+  
+  .navbar-mobile-menu {
+    top: 52px;
+    width: 80vw;
+    max-width: 280px;
+  }
+  
+  .navbar-mobile-menu a {
+    padding: 16px 20px;
+    font-size: 1rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 12px 14px;
+  }
+  
+  .navbar-logo {
+    height: 22px;
+  }
+  
+  .navbar-hamburger {
+    font-size: 40px;
+    right: 10px;
+    padding: 14px;
+  }
+  
+  .navbar-hamburger .material-symbols-outlined {
+    font-size: 40px;
+  }
+  
+  .navbar-mobile-menu {
+    top: 48px;
+    width: 85vw;
+    max-width: 260px;
+  }
+  
+  .navbar-mobile-menu a {
+    padding: 14px 18px;
+    font-size: 0.95rem;
+  }
 }
