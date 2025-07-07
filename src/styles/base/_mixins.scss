@@ -19,12 +19,6 @@
   }
 }
 
-@mixin large-desktop {
-  @media (min-width: 1200px) {
-    @content;
-  }
-}
-
 // Flexbox utilities
 @mixin flex-center {
   display: flex;
@@ -36,11 +30,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-@mixin flex-column {
-  display: flex;
-  flex-direction: column;
 }
 
 // Button styles
@@ -56,20 +45,10 @@
   justify-content: center;
 }
 
-@mixin button-hover-effect {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-}
-
-// Glass morphism effect
+// Glass effect
 @mixin glass-effect($opacity: 0.1) {
   background: rgba(255, 255, 255, $opacity);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-// Text shadow
-@mixin text-shadow($color: rgba(0, 0, 0, 0.5)) {
-  text-shadow: 0 2px 12px $color;
 }
