@@ -3,36 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kapehorn - Pioneering immersive social content for the Spatial Computing era. Experience VR racing with Lift Shift Drift and join the future of spatial experiences.">
-    <meta name="keywords" content="spatial computing, VR, immersive content, virtual reality, racing games, Meta Quest">
-    <meta name="author" content="Kapehorn Inc.">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kapehorn.com/">
-    <meta property="og:title" content="Kapehorn - Immerse Together Beyond the Screen">
-    <meta property="og:description" content="We pioneer immersive social content on the wave of the Spatial Computing era.">
-    <meta property="og:image" content="LogoType.png">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://kapehorn.com/">
-    <meta property="twitter:title" content="Kapehorn - Immerse Together Beyond the Screen">
-    <meta property="twitter:description" content="We pioneer immersive social content on the wave of the Spatial Computing era.">
-    <meta property="twitter:image" content="LogoType.png">
-    
     <title>Kapehorn</title>
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="styles/main.css" as="style">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" as="style">
-    <link rel="preload" href="LogoType.png" as="image">
-    <link rel="preload" href="Logo.svg" as="image">
-    
     <!-- External Resources -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/main.css">
@@ -49,28 +25,27 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar" data-navbar role="navigation" aria-label="Main navigation">
+    <nav class="navbar" data-navbar>
         <img class="navbar-logo" src="LogoType.png" alt="Kapehorn Logo">
         <div class="navbar-menu D3">
-            <a href="#about" class="D3">About us</a>
-            <a href="#products" class="D3">Products</a>
-            <a href="#careers" class="D3">Careers</a>
-            <a href="#support" class="D3">Support</a>
+            <a href="#" class="D3">About us</a>
+            <a href="#" class="D3">Products</a>
+            <a href="#" class="D3">Careers</a>
+            <a href="#" class="D3">Support</a>
         </div>
-        <button class="navbar-hamburger" data-mobile-menu-toggle aria-label="Toggle mobile menu" aria-expanded="false">
+        <button class="navbar-hamburger" data-mobile-menu-toggle alt="Menu">
             <span class="material-symbols-outlined D3">menu</span>
         </button>
-        <div class="navbar-mobile-menu D3" data-mobile-menu role="menu" aria-hidden="true">
-            <a href="#about" class="D3" role="menuitem">About us</a>
-            <a href="#products" class="D3" role="menuitem">Products</a>
-            <a href="#careers" class="D3" role="menuitem">Careers</a>
-            <a href="#support" class="D3" role="menuitem">Support</a>
+        <div class="navbar-mobile-menu D3" data-mobile-menu>
+            <a href="#" class="D3">About us</a>
+            <a href="#" class="D3">Products</a>
+            <a href="#" class="D3">Careers</a>
+            <a href="#" class="D3">Support</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <main>
-    <section class="hero" id="hero-section" data-hero role="banner" aria-labelledby="hero-title">
+    <section class="hero" id="hero-section" data-hero>
         <canvas id="hero-bg-gradient" data-gradient-canvas></canvas>
         
         <div class="ci-visual" data-ci-visual>
@@ -89,63 +64,63 @@
         </div>
         
         <div class="hero-content" data-hero-content>
-            <h1 class="hero-title H1" id="hero-title">Immerse Together<br>Beyond the Screen</h1>
+            <h1 class="hero-title H1">Immerse Together<br>Beyond the Screen</h1>
             <p class="hero-desc D2">We pioneer immersive social content on the wave of the Spatial Computing era.</p>
             <p class="hero-desc D2">우리는 공간 컴퓨팅 시대의 파도 위에서 몰입형 소셜 콘텐츠 영역을 개척합니다.</p>
         </div>
         
-        <button class="section-arrow" data-scroll-arrow="contents-section" aria-label="Scroll to content section">
+        <div class="section-arrow" data-scroll-arrow="contents-section">
             <span class="material-symbols-outlined">keyboard_arrow_down</span>
-        </button>
+        </div>
     </section>
 
     <!-- Content Section -->
-    <section class="contents-section" id="contents-section" data-content-section role="main" aria-labelledby="content-title">
+    <section class="contents-section" id="contents-section" data-content-section>
         <div class="content-card">
-            <video class="content-bg" src="LSD_MultiPlay.mp4" autoplay loop muted playsinline preload="metadata" aria-hidden="true"></video>
+            <video class="content-bg" src="LSD_MultiPlay.mp4" autoplay loop muted playsinline></video>
             <div class="content-info">
                 <img class="game-logo" src="LiftShiftDrift_Logo.png" alt="Lift Shift Drift 로고">
-                <h2 class="title H1" id="content-title">Lift Shift Drift</h2>
+                <h2 class="title H1">Lift Shift Drift</h2>
                 <p class="desc D2">A fast-paced, immersive racing adventure in a vibrant world. Race, drift, and challenge your friends!</p>
                 <div class="btns">
-                    <button class="btn-quest BTN" aria-label="Download Lift Shift Drift on Meta Quest">Available on Meta Quest</button>
+                    <button class="btn-quest BTN">Available on Meta Quest</button>
                 </div>
             </div>
         </div>
         
-        <button class="section-arrow" data-scroll-arrow="core-values-section" aria-label="Scroll to core values section">
+        <div class="section-arrow" data-scroll-arrow="core-values-section">
             <span class="material-symbols-outlined">keyboard_arrow_down</span>
-        </button>
+        </div>
     </section>
 
     <!-- Core Values Section -->
-    <section class="core-values-section" id="core-values-section" data-core-values-section role="region" aria-labelledby="core-values-title">
-        <h2 class="core-title H1" data-core-title id="core-values-title">Core Values</h2>
+    <section class="core-values-section" id="core-values-section" data-core-values-section>
+        <h2 class="core-title H1" data-core-title>Core Values</h2>
         <div class="core-values" data-core-values>
-            <article class="core-value" data-core-value>
+            <div class="core-value" data-core-value>
                 <h3 class="core-value-title H2">Crafting<br>Spatial Experience</h3>
                 <p class="core-value-desc">다수의 사용자가 함께 몰입하며 즐기는<br> 공간 경험을 제작합니다.</p>
-            </article>
-            <article class="core-value" data-core-value>
+            </div>
+            <div class="core-value" data-core-value>
                 <h3 class="core-value-title H2">Challenge to<br>Clipper Routes</h3>
                 <p class="core-value-desc">실패를 두려워하지 않으며, 변화에 <br>유연하게 대응하고 새로운 길을 찾습니다.</p>
-            </article>
-            <article class="core-value" data-core-value>
+            </div>
+            <div class="core-value" data-core-value>
                 <h3 class="core-value-title H2">Pioneering<br>with Immerser</h3>
                 <p class="core-value-desc">사용자들의 의견을 적극적으로 받아들이고<br> 함께 제품을 만들어갑니다.</p>
-            </article>
+            </div>
         </div>
         
-        <button class="section-arrow" data-scroll-arrow="wave-section" aria-label="Scroll to wave section">
+        <div class="section-arrow" data-scroll-arrow="wave-section">
             <span class="material-symbols-outlined">keyboard_arrow_down</span>
-        </button>
+        </div>
     </section>
 
     <!-- Wave Section -->
-    <section class="wave-section" id="wave-section" data-wave-section role="region" aria-labelledby="wave-title">
+    <section class="wave-section" id="wave-section" data-wave-section>
         <div class="wave-intro" data-wave-intro>
             <div class="wave-intro-en wave-intro-appear" data-wave-intro-en>The Surging Wave :</div>
-            <h2 class="wave-intro-title wave-intro-appear" data-wave-intro-title id="wave-title">Spatial Experience</h2>
+            <h2 class="wave-intro-title wave-intro-appear" data-wave-intro-title>Spatial Experience</h2>
             <div class="wave-intro-desc wave-intro-appear" data-wave-intro-desc>
                 공간 경험의 시대가 다가오고 있습니다.<br><br>
                 스마트폰 다음의 새로운 하드웨어 플랫폼 전환은 이미 시작되었고,<br>
@@ -157,25 +132,22 @@
         
         <div class="wave-inner" data-wave-inner>
             <img class="wave-logo" data-wave-logo src="Frame 39.png" alt="Kapehorn Logo">
-            <h3 class="join-title">Join Kapehorn</h3>
+            <h1 class="join-title">Join Kapehorn</h1>
             <p class="join-desc">Shape the future of immersive contents.</p>
-            <button class="join-btn" aria-label="View open job positions at Kapehorn">Open Jobs</button>
+            <button class="join-btn">Open Jobs</button>
         </div>
     </section>
-    </main>
 
     <!-- Footer -->
-    <footer class="footer-section D4" role="contentinfo">
+    <footer class="footer-section D4">
         <div class="footer-left D4">© Kapehorn Inc. 2025</div>
         <div class="footer-right">
-            <a href="#" class="D4" aria-label="Visit Kapehorn on Instagram">Instagram</a>
-            <a href="#" class="D4" aria-label="Read Kapehorn's Privacy Policy">Privacy Policy</a>
+            <a href="#" class="D4">Instagram</a>
+            <a href="#" class="D4">Privacy Policy</a>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="scripts/utils/performance-monitor.js"></script>
-    <script src="scripts/utils/accessibility-helpers.js"></script>
     <script src="scripts/utils/constants.js"></script>
     <script src="scripts/utils/animation-utils.js"></script>
     <script src="scripts/utils/dom-helpers.js"></script>

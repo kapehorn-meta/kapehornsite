@@ -14,12 +14,6 @@
   transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
-  outline: none;
-}
-
-.btn-download:focus {
-  outline: 2px solid var(--color-white);
-  outline-offset: 2px;
 }
 
 .btn-download:hover {
@@ -53,12 +47,6 @@
   cursor: pointer;
   box-shadow: var(--shadow-lg);
   transition: all var(--transition-normal);
-  outline: none;
-}
-
-.btn-discord:focus {
-  outline: 2px solid var(--color-white);
-  outline-offset: 2px;
 }
 
 .btn-discord:hover {
@@ -84,12 +72,6 @@
   overflow: hidden;
   font-weight: 600;
   letter-spacing: 0.5px;
-  outline: none;
-}
-
-.btn-quest:focus {
-  outline: 2px solid var(--color-white);
-  outline-offset: 2px;
 }
 
 .btn-quest:hover {

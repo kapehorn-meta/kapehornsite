@@ -54,12 +54,6 @@ const AnimationUtils = {
   
   // Smooth scroll animation
   smoothScrollTo: (targetPosition, duration = 1000) => {
-    // Check for reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      window.scrollTo(0, targetPosition);
-      return;
-    }
-    
     const startPosition = window.pageYOffset;
     const distance = targetPosition - startPosition;
     let start = null;

@@ -117,8 +117,6 @@ section {
 
 /* ===== Section Arrows ===== */
 .section-arrow {
-  background: none;
-  border: none;
   position: absolute;
   bottom: 30px;
   left: 50%;
@@ -127,12 +125,6 @@ section {
   transition: all var(--transition-normal);
   z-index: var(--z-section-arrow);
   padding: 10px;
-  outline: none;
-}
-
-.section-arrow:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
 }
 
 .contents-section .section-arrow,

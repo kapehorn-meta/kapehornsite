@@ -17,7 +17,6 @@ class SmoothScroll {
   }
   
   handleArrowClick(event) {
-    event.preventDefault();
     const arrow = event.currentTarget;
     const targetSectionId = arrow.getAttribute('data-scroll-arrow');
     
