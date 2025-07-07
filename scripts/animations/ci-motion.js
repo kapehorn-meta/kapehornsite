@@ -120,10 +120,15 @@ class CIMotion {
     const centerY = svgH / 2;
     
     const { WIDTH: mountainW, HEIGHT: mountainH } = CONSTANTS.MOUNTAIN_DIMENSIONS;
-    const scale = 2 * Math.min(svgW * 0.7 / mountainW, svgH * 0.18 / mountainH);
+    
+    // Adjust mountain scale for mobile
+    const isMobile = svgW <= 600;
+    const widthFactor = isMobile ? 0.8 : 0.7;
+    const heightFactor = isMobile ? 0.15 : 0.18;
+    const scale = 2 * Math.min(svgW * widthFactor / mountainW, svgH * heightFactor / mountainH);
     
     const offsetX = centerX - (mountainW * scale) / 2;
-    const offsetY = centerY - (mountainH * scale) / 2 - svgH * 0.1;
+    const offsetY = centerY - (mountainH * scale) / 2 - (isMobile ? svgH * 0.05 : svgH * 0.1);
     
     DOMHelpers.setAttributes(mountain, {
       d: CONSTANTS.MOUNTAIN_PATH,
@@ -149,18 +154,34 @@ class CIMotion {
     const { WIDTH: mountainW, HEIGHT: mountainH } = CONSTANTS.MOUNTAIN_DIMENSIONS;
     const scale = 2 * Math.min(svgW * 0.7 / mountainW, svgH * 0.18 / mountainH);
     
-    const baseY = centerY + (mountainH * scale) / 2 + scale * 8 - svgH * 0.1;
+    // Adjust baseY for mobile screens
+    const isMobile = svgW <= 600;
+    const baseYOffset = isMobile ? svgH * 0.05 : svgH * 0.1;
+    const baseY = centerY + (mountainH * scale) / 2 + scale * 8 - baseYOffset;
     const lineCount = 7;
     
     this.lines = [];
     this.lineParams = [];
     
     for (let i = 0; i < lineCount; i++) {
-      const y = baseY + i * scale * 38 / 2.5;
+      // Adjust line spacing and thickness for mobile
+      const lineSpacing = isMobile ? scale * 28 / 2.5 : scale * 38 / 2.5;
+      const y = baseY + i * lineSpacing;
+      
+      // Ensure lines stay within viewport
+      if (y > svgH - 20) break;
+      
       const thickness = i === 0 ? scale * 1.5 : scale * (1 + i * 4.5) / 3.5;
-      const halfWidth = svgW * 0.35 - i * scale * 18 / 2.5;
+      
+      // Adjust line width for mobile
+      const widthFactor = isMobile ? 0.4 : 0.35;
+      const widthReduction = isMobile ? scale * 12 / 2.5 : scale * 18 / 2.5;
+      const halfWidth = svgW * widthFactor - i * widthReduction;
       const left = centerX - halfWidth;
       const right = centerX + halfWidth;
+      
+      // Skip lines that would be too narrow
+      if (halfWidth < scale * 10) continue;
       
       const line = DOMHelpers.createSVGElement('rect', {
         x: left,
