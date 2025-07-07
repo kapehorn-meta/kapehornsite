@@ -17,6 +17,7 @@
 }
 
 .navbar-logo {
+  flex: 0 0 auto;
   height: 32px;
   width: auto;
   max-width: none;
