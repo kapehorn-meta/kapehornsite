@@ -17,9 +17,9 @@
 }
 
 .navbar-logo {
-  width: 64px;
   height: 32px;
-  background: url('https://framerusercontent.com/images/1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw.svg') no-repeat center/contain;
+  width: auto;
+  object-fit: contain;
 }
 
 .navbar-menu {
