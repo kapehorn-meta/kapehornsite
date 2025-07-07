@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kapehorn</title>
+    
+    <!-- 외부 리소스 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+        /* ===== 기본 스타일 ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap');
+        
+        /* 기본 레이아웃 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+            font-size: 16px;
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Urbanist', Arial, sans-serif;
+            background: #fff;
+            color: #111;
+            min-height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            font-size: 1rem;
+            width: 100%;
+        }
+        /* ===== 섹션 공통 스타일 ===== */
+        section.contents-section,
+        section.core-values-section,
+        section.wave-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* ===== 네비게이션 바 ===== */
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px 18px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-sizing: border-box;
+            transform: translateY(-100%);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar.show {
+            transform: translateY(0);
+        }
+        
+        .navbar.hide {
+            transform: translateY(-100%);
+        }
+        
+        .navbar-logo {
+            width: 64x;
+            height: 32px;
+            background: url('https://framerusercontent.com/images/1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw.svg') no-repeat center/contain;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            gap: 24px;
+            font-size: 1rem;
+        }
+        
+        .navbar-menu a {
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .navbar-menu a:hover {
+            color: #007aff;
+        }
+        /* ===== Hero 섹션 ===== */
+        .hero {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            height: 100vh;
+            min-height: 600px;
+            margin-top: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        #hero-bg-gradient {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        #ci-visual {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        #ci-svg {
+            width: 100%;
+            height: 100vh;
+            display: block;
+        }
+        
+        #hero-content {
+            position: absolute;
+            top: auto;
+            bottom: 20vh;
+            left: 50%;
+            transform: translate(-50%, 0);
+            z-index: 4;
+            width: 100%;
+            pointer-events: auto;
+        }
+        
+        .hero-title {
+            margin-bottom: 28px;
+            text-shadow: 0 1.5px 12px rgba(71, 71, 71, 0.533);
+        }
+        
+        .hero-desc {
+            color: #ffffff;
+            line-height: 1.5;
+        }
+        /* ===== 콘텐츠 섹션 ===== */
+        .contents-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
+        .content-card {
+            aspect-ratio: 16 / 9;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: inherit;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            background: #222;
+            flex: 1 1 auto;
+        }
+        
+        @supports not (aspect-ratio: 16 / 9) {
+            .content-card {
+                height: auto;
+            }
+            .content-card::before {
+                content: '';
+                display: block;
+                padding-top: 56.25%; /* 9/16*100 */
+            }
+        }
+        
+        .content-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.7) blur(0.5px);
+            pointer-events: none;
+        }
+        
+        .content-info {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            z-index: 2;
+            min-width: 420px;
+            max-width: 520px;
+            width: 38vw;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            background: linear-gradient(to right, rgba(20, 20, 30, 0) 0%, rgba(20, 20, 30, 0.45) 100%);
+            padding: 0px 40px 40px 40px;
+            text-align: left;
+            backdrop-filter: blur(8px);
+        }
+        
+        .game-logo {
+            width: 340px;
+            max-width: 100%;
+            margin-bottom: 24px;
+            margin-left: 0;
+            filter: drop-shadow(0 4px 24px #0008);
+        }
+        
+        .content-info .title {
+            color: #fff;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            line-height: 1.1;
+        }
+        
+        .desc {
+            color: #fff;
+            margin-bottom: 32px;
+            font-weight: 500;
+            text-shadow: 0 2px 12px #0008;
+        }
+        
+        .btns {
+            display: flex;
+            gap: 18px;
+            justify-content: flex-start;
+            width: 100%;
+        }
+        /* ===== 버튼 스타일 ===== */
+        .btn-download {
+            background: rgba(122, 95, 255, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(122, 95, 255, 0.3);
+            border-radius: 12px;
+            padding: 14px 38px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(122, 95, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-download:hover::before {
+            left: 100%;
+        }
+        
+        .btn-download:hover {
+            background: rgba(122, 95, 255, 0.3);
+            border-color: rgba(122, 95, 255, 0.5);
+            box-shadow: 0 12px 40px rgba(122, 95, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-download.pink {
+            background: rgba(255, 105, 180, 0.2);
+            border-color: rgba(255, 105, 180, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 105, 180, 0.2);
+        }
+        
+        .btn-download.pink:hover {
+            background: rgba(255, 105, 180, 0.3);
+            border-color: rgba(255, 105, 180, 0.5);
+            box-shadow: 0 12px 40px rgba(255, 105, 180, 0.3);
+        }
+        
+        .btn-discord {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 14px 34px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-discord:hover {
+            background: rgba(88, 101, 242, 0.2);
+            border-color: rgba(88, 101, 242, 0.4);
+            box-shadow: 0 12px 40px rgba(88, 101, 242, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .btn-quest {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 16px 32px;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-quest::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-quest:hover::before {
+            left: 100%;
+        }
+        
+        .btn-quest:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        /* ===== Core Values 섹션 ===== */
+        .core-values-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a223a 0%, #08141c 100%);
+            color: #fff;
+            padding: 0 0 20px 0;
+            text-align: center;
+        }
+
+        .core-title {
+            letter-spacing: 2.5px;
+            margin-bottom: 60px;
+            margin-top: -20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .core-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .core-values {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .core-value {
+            flex: 1 1 0;
+            min-width: 0;
+            max-width: none;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 0 16px;
+        }
+        
+        .core-value.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .core-value:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .core-value-title {
+            margin-bottom: 24px;
+            line-height: 1.25;
+            text-align: center;
+            font-size: 1.28rem;
+            transition: color 0.3s ease;
+        }
+        
+        .core-value:hover .core-value-title {
+            color: #7A5FFF;
+        }
+        
+        .core-value-desc {
+            color: #c7e0ff;
+            line-height: 1.7;
+            text-align: center;
+            margin-top: 0;
+            font-size: 1.1rem;
+            font-weight: 320;
+            transition: color 0.3s ease;
+            height: 4.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .core-value:hover .core-value-desc {
+            color: #ffffff;
+        }
+
+        /* ===== Wave 섹션 ===== */
+        .wave-section {
+            background: linear-gradient(180deg, #08141c 0%, #030f1a 100%);
+            color: #fff;
+            width: 100%;
+            max-width: none;
+            margin: 0 auto;
+            text-align: center;
+            padding: 80px 40px 180px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        
+        .wave-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            padding: 0;
+            position: relative;
+            min-height: 420px;
+            margin-top: 100px;
+        }
+        
+        .wave-logo {
+            width: 420px;
+            max-width: 98vw;
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            transform: none;
+            opacity: 0;
+            transform: scale(0.92) translateY(40px);
+            transition: all 1s cubic-bezier(0.4,0,0.2,1);
+            z-index: 0;
+            margin-bottom: -160px;
+        }
+        
+        .wave-logo.show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        
+        .join-title,
+        .join-desc,
+        .join-btn {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .join-title {
+            font-size: 4.5rem;
+            font-weight: 500;
+            color: #fff;
+            margin-bottom: 0;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .join-desc {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #e0e6ed;
+            margin-bottom: 24px;
+            text-align: center;
+            letter-spacing: 0.01em;
+        }
+        
+        .join-btn {
+            background: transparent;
+            color: #fff;
+            border: 1.5px solid #7A5FFF;
+            border-radius: 16px;
+            padding: 18px 56px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+            box-shadow: none;
+        }
+        
+        .join-btn:hover {
+            background: rgba(122,95,255,0.12);
+            border-color: #fff;
+        }
+        
+        /* ===== Footer ===== */
+        .footer-section {
+            background: #010911;
+            color: #c7e0ff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 16px;
+            border-top: 1px solid #1a2e3b;
+        }
+        
+        .footer-left {
+            font-weight: 500;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 18px;
+        }
+        
+        .footer-right a {
+            color: #c7e0ff;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-right a:hover {
+            color: #7A5FFF;
+        }
+        
+        /* ===== 섹션 화살표 ===== */
+        .section-arrow {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            padding: 10px;
+        }
+        
+        /* Hero 섹션 제외한 다른 섹션들의 화살표 위치 조정 */
+        .contents-section .section-arrow,
+        .core-values-section .section-arrow,
+        .wave-section .section-arrow {
+            bottom: 60px;
+        }
+        
+        .section-arrow:hover {
+            transform: translateX(-50%) translateY(-5px);
+        }
+        
+        .section-arrow .material-symbols-outlined {
+            color: #fff;
+            font-size: 32px;
+            transition: transform 0.3s ease;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-arrow:hover .material-symbols-outlined {
+            transform: translateY(3px);
+        }
+        
+        /* Hero 섹션 화살표는 흰색 */
+        .hero .section-arrow .material-symbols-outlined {
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            section.contents-section {
+                min-height: 100vh;
+                padding: 0;
+            }
+            .content-card { min-height: 48vw; height: 48vw; }
+            .content-info { padding: 28px 4vw 18px 4vw; }
+            .game-logo {
+                width: 60vw;
+                max-width: 90vw;
+            }
+            
+            .btn-download, .btn-discord { padding: 10px 18px; }
+            .core-title {
+                margin-bottom: 32px;
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            .core-values {
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+                max-width: 100%;
+            }
+            .core-value {
+                padding: 24px 16px;
+                min-width: 0;
+                width: 90%;
+                max-width: 400px;
+                margin-bottom: 20px;
+            }
+            .core-value-title {
+                margin-bottom: 16px;
+                font-size: 1.44rem;
+            }
+            .core-value-desc {
+                font-size: 0.95rem;
+                font-weight: 320;
+                height: 4.5em;
+            }
+            .core-values-section {
+                padding: 0px 0 40px 0;
+            }
+            .wave-section {
+                padding: 80px 20px;
+                min-height: 100vh;
+                min-width: 0;
+                max-width: 100%;
+            }
+            .wave-inner {
+                min-height: 280px;
+            }
+            .wave-logo {
+                width: 260px;
+                top: -120px;
+            }
+            .join-title {
+                font-size: 2.1rem;
+            }
+            .join-desc {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+            }
+            .join-btn {
+                font-size: 1rem;
+                padding: 12px 32px;
+            }
+            .footer-section { padding: 12px 6px; }
+            /* 햄버거 메뉴 모바일에서 보이게 */
+            .navbar-menu { display: none; }
+            .navbar-hamburger { display: block !important; }
+        }
+        @media (max-width: 600px) {
+            html {
+                font-size: 12px;
+            }
+            .hero-title {
+                font-size: 1.25rem;
+            }
+            .core-title {
+                font-size: 2.25rem;
+            }
+            .core-value-title {
+                font-size: 1.28rem;
+            }
+            .core-value-desc {
+                font-size: 0.8rem;
+                font-weight: 320;
+                height: 4.5em;
+            }
+            .wave-inner {
+                min-height: 160px;
+            }
+            .wave-logo {
+                width: 150px;
+                top: -60px;
+            }
+            .join-title {
+                font-size: 1.2rem;
+            }
+            .join-desc {
+                font-size: 0.8rem;
+                margin-bottom: 12px;
+            }
+            .join-btn {
+                font-size: 0.85rem;
+                padding: 8px 18px;
+            }
+            .wave-section {
+                padding: 120px 8px 100px 8px;
+            }
+            .wave-intro {
+                margin-bottom: 40px;
+            }
+            .footer-section {
+                font-size: 0.625rem;
+            }
+            #ci-logo-img {
+                width: 195.67px !important;
+                height: 103.60px !important;
+            }
+            .wave-intro {
+                max-width: 700px;
+                margin: 0 auto 80px auto;
+                text-align: center;
+                color: #fff;
+                z-index: 2;
+                position: relative;
+            }
+        }
+        /* ===== 모바일 메뉴 ===== */
+        .navbar-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 48px;
+            color: #111;
+            cursor: pointer;
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 201;
+            padding: 8px;
+        }
+        
+        .navbar-mobile-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 0;
+            width: 70vw;
+            max-width: 320px;
+            background: #fff;
+            box-shadow: -2px 0 16px #0002;
+            flex-direction: column;
+            padding: 24px 0;
+            z-index: 199;
+        }
+        
+        .navbar-mobile-menu a {
+            display: block;
+            padding: 16px 32px;
+            color: #111;
+            text-decoration: none;
+            font-size: 1.125rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .navbar-mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* ===== Material Icons ===== */
+        .material-icons {
+            font-family: 'Material Icons';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 48px;
+            display: inline-block;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+            font-size: 48px;
+            display: inline-block;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            white-space: nowrap;
+            direction: ltr;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* ===== 특수 요소 ===== */
+        .core-values-section { 
+            position: relative; 
+            overflow: hidden; 
+        }
+        
+        #ci-logo-img {
+            width: 391.34px !important;
+            height: 207.20px !important;
+            max-width: none !important;
+            max-height: none !important;
+        }
+        /* ===== 폰트 스타일 클래스 ===== */
+        .H1 { font-size: 4rem; font-weight: 500; line-height: 1.1; }
+        .H2 { font-size: 2rem; font-weight: 600; line-height: 1.15; }
+        .H3 { font-size: 2rem; font-weight: 500; line-height: 1.2; }
+        .H4 { font-size: 1.5rem; font-weight: 500; line-height: 1.25; }
+        .H5 { font-size: 1.2rem; font-weight: 500; line-height: 1.3; }
+        .H6 { font-size: 1rem; font-weight: 500; line-height: 1.3; }
+        .D1 { font-size: 1.26rem; font-weight: 400; line-height: 1.5; }
+        .D2 { font-size: 1.1rem; font-weight: 400; line-height: 1.5; }
+        .D3 { font-size: 1rem; font-weight: 400; line-height: 1.5; }
+        .D4 { font-size: 0.85rem; font-weight: 400; line-height: 1.5; }
+        .BTN { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; }
+        @media (max-width: 900px) {
+            .H1 { font-size: 2.75rem; }
+            .H2 { font-size: 2.25rem; }
+            .H3 { font-size: 1.5rem; }
+            .H4 { font-size: 1.1rem; }
+            .H5 { font-size: 1rem; }
+            .H6 { font-size: 0.9rem; }
+            .D1 { font-size: 1.2rem; }
+            .D2 { font-size: 1rem; }
+            .D3 { font-size: 0.85rem; }
+            .D4 { font-size: 0.75rem; }
+            .BTN { font-size: 0.95rem; }
+            #ci-logo-img {
+                width: 293.51px !important;
+                height: 155.40px !important;
+            }
+        }
+        @media (max-width: 600px) {
+            .H1 { font-size: 2rem; }
+            .H2 { font-size: 1.25rem; }
+            .H3 { font-size: 1rem; }
+            .H4 { font-size: 0.95rem; }
+            .H5 { font-size: 0.85rem; }
+            .H6 { font-size: 0.75rem; }
+            .D1 { font-size: 1rem; }
+            .D2 { font-size: 0.85rem; }
+            .D3 { font-size: 0.75rem; }
+            .D4 { font-size: 0.65rem; }
+            .BTN { font-size: 0.8rem; }
+        }
+        /* ===== Wave Intro ===== */
+        .wave-intro {
+            max-width: 700px;
+            margin: 0 auto 200px auto;
+            text-align: center;
+            color: #fff;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .wave-intro-en {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-bottom: 8px;
+            letter-spacing: 0.04em;
+        }
+        
+        .wave-intro-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            letter-spacing: 0.01em;
+            line-height: 1.1;
+        }
+        
+        .wave-intro-desc {
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 2;
+            opacity: 0.92;
+            letter-spacing: 0.01em;
+        }
+        @media (max-width: 600px) {
+        .wave-intro-title { font-size: 1.5rem; }
+        .wave-intro-desc { font-size: 0.95rem; }
+        .wave-section {
+            padding: 120px 8px 100px 8px;
+        }
+        .wave-intro {
+            margin-bottom: 40px;
+        }
+        }
+        /* ===== 애니메이션 ===== */
+        /* wave-intro 등장 애니메이션 */
+        .wave-intro-appear { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 0.8s cubic-bezier(0.4,0,0.2,1); 
+        }
+        
+        .wave-intro-appear.show { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+        
+        .wave-intro-en { transition-delay: 0.1s; }
+        .wave-intro-title { transition-delay: 0.5s; }
+        .wave-intro-desc { transition-delay: 0.9s; }
+        
+        /* wave-logo 등장 애니메이션 */
+        .wave-logo { 
+            opacity: 0; 
+            transform: scale(0.92) translateY(40px); 
+            transition: all 1s cubic-bezier(0.4,0,0.2,1); 
+        }
+        
+        .wave-logo.show { 
+            opacity: 1; 
+            transform: scale(1) translateY(0); 
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img class="navbar-logo" src="LogoType.png" alt="Kapehorn Logo">
+        <div class="navbar-menu D3">
+            <a href="#" class="D3">About us</a>
+            <a href="#" class="D3">Products</a>
+            <a href="#" class="D3">Careers</a>
+            <a href="#" class="D3">Support</a>
+        </div>
+        <button class="navbar-hamburger" id="navbar-hamburger" alt="Menu">
+            <span class="material-symbols-outlined D3">menu</span>
+        </button>
+        <div class="navbar-mobile-menu D3" id="navbar-mobile-menu">
+            <a href="#" class="D3">About us</a>
+            <a href="#" class="D3">Products</a>
+            <a href="#" class="D3">Careers</a>
+            <a href="#" class="D3">Support</a>
+        </div>
+    </div>
+    <div class="hero" id="hero-section">
+        <canvas id="hero-bg-gradient" style="position:absolute;top:0;left:0;width:100%;height:100vh;z-index:2;pointer-events:none;" width="100%" height="100vh"></canvas>
+        <div id="ci-visual">
+            <svg id="ci-svg" width="100%" height="100vh" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;width:100%;height:100vh;">
+                <!-- 산 그룹 -->
+                <g id="ci-mountain-group">
+                    <path id="ci-mountain" fill="white"/>
+                </g>
+                <!-- 수평선 그룹 -->
+                <g id="ci-lines-group"></g>
+                <!-- 고글 그룹(추후) -->
+                <g id="ci-goggle-group"></g>
+                <!-- Glow 그룹(추후) -->
+                <g id="ci-glow-group"></g>
+            </svg>
+            <!-- Logo.svg가 등장할 위치 -->
+            <div id="ci-logo-wrap" style="position:absolute;top:0;left:0;width:100%;height:70vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:10;opacity:0;transition:opacity 0.1s;">
+                <img id="ci-logo-img" src="Logo.svg" style="width:391.34px;height:207.20px;filter:drop-shadow(0 0 12px #a9a0d4) drop-shadow(0 0 64px #eceaf7);" alt="Logo" />
+            </div>
+        </div>
+        <div class="hero-content" id="hero-content" style="top:auto; bottom:15vh; left:50%; transform:translate(-50%,0); z-index:4;">
+            <div class="hero-title H1">Immerse Together<br>Beyond the Screen</div>
+            <div class="hero-desc D2">We pioneer immersive social content on the wave of the Spatial Computing era.</div>
+            <div class="hero-desc D2">우리는 공간 컴퓨팅 시대의 파도 위에서 몰입형 소셜 콘텐츠 영역을 개척합니다.</div>
+        </div>
+        <div class="section-arrow" onclick="scrollToNextSection('contents-section')">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+    </div>
+    <!-- 콘텐츠 카드 영역 -->
+    <section class="contents-section" id="contents-section">
+        <div class="content-card">
+            <video class="content-bg" src="LSD_MultiPlay.mp4" autoplay loop muted playsinline></video>
+            <div class="content-info">
+                <img class="game-logo" src="LiftShiftDrift_Logo.png" alt="Lift Shift Drift 로고">
+                <div class="title H1">Lift Shift Drift</div>
+                <div class="desc D2">A fast-paced, immersive racing adventure in a vibrant world. Race, drift, and challenge your friends!</div>
+                <div class="btns">
+                    <button class="btn-quest BTN">Available on Meta Quest</button>
+                </div>
+            </div>
+        </div>
+        <div class="section-arrow" onclick="scrollToNextSection('core-values-section')">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+    </section>
+    <!-- Core Values -->
+    <section class="core-values-section" id="core-values-section">
+        <div class="core-title H1">Core Values</div>
+        <div class="core-values">
+                          <div class="core-value">
+                  <div class="core-value-title H2">Crafting<br>Spatial Experience</div>
+                  <div class="core-value-desc">다수의 사용자가 함께 몰입하며 즐기는<br> 공간 경험을 제작합니다.</div>
+              </div>
+              <div class="core-value">
+                  <div class="core-value-title H2">Challenge to<br>Clipper Routes</div>
+                  <div class="core-value-desc">실패를 두려워하지 않으며, 변화에 <br>유연하게 대응하고 새로운 길을 찾습니다.</div>
+              </div>
+              <div class="core-value">
+                  <div class="core-value-title H2">Pioneering<br>with Immerser</div>
+                  <div class="core-value-desc">사용자들의 의견을 적극적으로 받아들이고<br> 함께 제품을 만들어갑니다.</div>
+              </div>
+        </div>
+        <div class="section-arrow" onclick="scrollToNextSection('wave-section')">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+    </section>
+    <!-- Wave/소개 -->
+    <section class="wave-section" id="wave-section">
+        <div class="wave-intro">
+            <div class="wave-intro-en wave-intro-appear">The Surging Wave :</div>
+            <div class="wave-intro-title wave-intro-appear">Spatial Experience</div>
+            <div class="wave-intro-desc wave-intro-appear">
+              공간 경험의 시대가 다가오고 있습니다.<br><br>
+              스마트폰 다음의 새로운 하드웨어 플랫폼 전환은 이미 시작되었고,<br>
+              전 세계 빅테크 기업들은 Spatial Computing을 향한 행렬을 이어가고 있습니다.<br><br>
+              이 거대한 기술 패러다임 변화의 시기에 케이프혼은 Spatial Computing 플랫폼 위에서<br> 사용자들을 연결하고, 재미를 창조하는 물리형 소셜 콘텐츠 영역을 개척하고자 합니다.<br><br>
+              케이프혼팀은 다음 세대 경험의 가능성을 누구보다 빠르게 실험하고,<br> 도전하며 찾아나가고 있습니다.
+            </div>
+        </div>
+        <div class="wave-inner">
+            <img class="wave-logo" src="Frame 39.png" alt="Kapehorn Logo">
+            <h1 class="join-title">Join Kapehorn</h1>
+            <div class="join-desc">Shape the future of immersive contents.</div>
+            <button class="join-btn">Open Jobs</button>
+        </div>
+    </section>
+    <!-- 푸터 -->
+    <footer class="footer-section D4">
+        <div class="footer-left D4">© Kapehorn Inc. 2025</div>
+        <div class="footer-right">
+            <a href="#" class="D4">Instagram</a>
+            <a href="#" class="D4">Privacy Policy</a>
+        </div>
+    </footer>
+    <script>
+        // ===== 전역 변수 =====
+        // Canvas 그라디언트 애니메이션 변수
+        let gradientCanvas, gradientCtx;
+        let gradientAnimationId;
+        let gradientTime = 0;
+
+        // CI 모션 변수
+        let ciMotionFrameIds = [];
+        let ciMotionTimeoutIds = [];
+        let ciMotionRunning = false;
+
+        // 네비게이션 바 스크롤 제어 변수
+        let lastScrollTop = 0;
+        let navbarInitialized = false;
+
+        // ===== 그라디언트 애니메이션 =====
+        // Canvas 그라디언트 애니메이션 초기화
+        function initGradientAnimation() {
+            gradientCanvas = document.getElementById('hero-bg-gradient');
+            gradientCtx = gradientCanvas.getContext('2d');
+            
+            // Canvas 크기 설정
+            function resizeCanvas() {
+                gradientCanvas.width = window.innerWidth;
+                gradientCanvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // 애니메이션 시작
+            animateGradient();
+        }
+
+        // 자유형 그라디언트 애니메이션
+        function animateGradient() {
+            const width = gradientCanvas.width;
+            const height = gradientCanvas.height;
+            
+            // 시간 기반 애니메이션 (더 부드러운 전환을 위해 속도 조절)
+            gradientTime += 0.025;
+            
+            // Canvas 클리어
+            gradientCtx.clearRect(0, 0, width, height);
+            
+            // 여러 개의 그라디언트 레이어 생성
+            const layers = 4;
+            
+            // === 그라디언트 애니메이션 범위와 움직임을 변수로 조절 ===
+            // 각 레이어별로 기본값과 진폭을 화면 비율(0~1)로 지정
+            const gradientLayers = [
+                { baseX: 0.1, baseY: 0.1, moveX: 0.05, moveY: 0.05, baseRadius: 0.9, moveRadius: 0.08, opacity: 0.7 },
+                { baseX: 0.3, baseY: 0.3, moveX: 0.08, moveY: 0.06, baseRadius: 0.8, moveRadius: 0.07, opacity: 0.6 },
+                { baseX: 0.7, baseY: 0.7, moveX: 0.07, moveY: 0.05, baseRadius: 0.9, moveRadius: 0.02, opacity: 0.5 },
+                { baseX: 0.9, baseY: 0.9, moveX: 0.04, moveY: 0.07, baseRadius: 0.8, moveRadius: 0.09, opacity: 0.5 }
+            ];
+            
+            for (let layer = 0; layer < layers; layer++) {
+                const layerTime = gradientTime * (0.5 + layer * 0.3);
+                const { baseX, baseY, moveX, moveY, baseRadius, moveRadius, opacity } = gradientLayers[layer];
+                const centerX = width * (baseX + Math.sin(layerTime * 0.5 + layer) * moveX);
+                const centerY = height * (baseY + Math.cos(layerTime * 0.3 + layer) * moveY);
+                const radius = Math.min(width, height) * (baseRadius + Math.sin(layerTime * 0.4 + layer) * moveRadius);
+                const layerOpacity = opacity;
+                
+                // 그라디언트 생성 (원형)
+                const gradient = gradientCtx.createRadialGradient(
+                    centerX, centerY, 0,
+                    centerX, centerY, radius
+                );
+                
+                // 색상 배열 (사용자 지정: #37AFFF, #5897FF, #7C7EFF)
+                const colors = [
+                    { r: 55,  g: 175, b: 255 },   // #37AFFF
+                    { r: 88,  g: 151, b: 255 },   // #5897FF
+                    { r: 124, g: 126, b: 255 }    // #7C7EFF
+                ];
+                
+                // 동적 색상 계산 (각 레이어마다 다른 속도)
+                const colorSpeed = 0.04 + layer * 0.02;
+                const colorIndex = (layerTime * colorSpeed) % colors.length;
+                const nextColorIndex = (colorIndex + 1) % colors.length;
+                const colorProgress = (layerTime * colorSpeed) % 1;
+                
+                const currentColor = colors[Math.floor(colorIndex)];
+                const nextColor = colors[Math.floor(nextColorIndex)];
+                
+                // 색상 보간 (부드러운 전환을 위해 Math.round 제거)
+                const r1 = currentColor.r + (nextColor.r - currentColor.r) * colorProgress;
+                const g1 = currentColor.g + (nextColor.g - currentColor.g) * colorProgress;
+                const b1 = currentColor.b + (nextColor.b - currentColor.b) * colorProgress;
+                
+                const r2 = nextColor.r + (colors[(Math.floor(nextColorIndex) + 1) % colors.length].r - nextColor.r) * colorProgress;
+                const g2 = nextColor.g + (colors[(Math.floor(nextColorIndex) + 1) % colors.length].g - nextColor.g) * colorProgress;
+                const b2 = nextColor.b + (colors[(Math.floor(nextColorIndex) + 1) % colors.length].b - nextColor.b) * colorProgress;
+                
+                // 그라디언트 색상 추가 (더 부드러운 전환을 위해 더 많은 색상 정지점 사용)
+                gradient.addColorStop(0, `rgba(${r1}, ${g1}, ${b1}, ${layerOpacity})`);
+                gradient.addColorStop(0.15, `rgba(${r1 * 0.8 + r2 * 0.2}, ${g1 * 0.8 + g2 * 0.2}, ${b1 * 0.8 + b2 * 0.2}, ${layerOpacity * 0.9})`);
+                gradient.addColorStop(0.3, `rgba(${r2}, ${g2}, ${b2}, ${layerOpacity * 0.7})`);
+                gradient.addColorStop(0.45, `rgba(${r2 * 0.8 + r1 * 0.2}, ${g2 * 0.8 + g1 * 0.2}, ${b2 * 0.8 + b1 * 0.2}, ${layerOpacity * 0.6})`);
+                gradient.addColorStop(0.6, `rgba(${r1}, ${g1}, ${b1}, ${layerOpacity * 0.5})`);
+                gradient.addColorStop(0.75, `rgba(${r1 * 0.6 + r2 * 0.4}, ${g1 * 0.6 + g2 * 0.4}, ${b1 * 0.6 + b2 * 0.4}, ${layerOpacity * 0.3})`);
+                gradient.addColorStop(0.9, `rgba(${r2 * 0.3 + r1 * 0.7}, ${g2 * 0.3 + g1 * 0.7}, ${b2 * 0.3 + b1 * 0.7}, ${layerOpacity * 0.1})`);
+                gradient.addColorStop(1, `rgba(${r2}, ${g2}, ${b2}, 0)`);
+                
+                // Canvas 채우기
+                gradientCtx.fillStyle = gradient;
+                gradientCtx.fillRect(0, 0, width, height);
+            }
+            
+            // 다음 프레임 요청
+            gradientAnimationId = requestAnimationFrame(animateGradient);
+        }
+
+        // 그라디언트 애니메이션 정리
+        function clearGradientAnimation() {
+            if (gradientAnimationId) {
+                cancelAnimationFrame(gradientAnimationId);
+            }
+        }
+
+
+
+
+
+        // ===== CI 모션 애니메이션 =====
+        function clearCIMotionAnimation() {
+            ciMotionFrameIds.forEach(id => cancelAnimationFrame(id));
+            ciMotionTimeoutIds.forEach(id => clearTimeout(id));
+            ciMotionFrameIds = [];
+            ciMotionTimeoutIds = [];
+            ciMotionRunning = false;
+        }
+        
+        function ciMotionSequence() {
+            if (ciMotionRunning) return;
+            ciMotionRunning = true;
+            clearCIMotionAnimation();
+            
+            // SVG 사이즈
+            const svgW = window.innerWidth;
+            const svgH = window.innerHeight;
+            const centerX = svgW / 2;
+            const centerY = svgH / 2;
+            
+            // 산 path (Mountain_ver3.svg)
+            const mountainPath = `M538.988 0.968806C541.624 1.13408 549.198 7.22309 552.327 11.0079C555.456 14.7928 555.95 19.5645 557.926 19.5645C559.902 19.5645 560.561 18.0841 561.22 17.4258C561.878 16.7679 562.207 22.6915 563.689 22.6915C565.172 22.6914 566.654 19.5645 569.124 19.5645C571.594 19.5649 571.429 24.8306 572.911 24.8311C574.393 24.8311 575.382 22.1981 578.017 24.8311C580.651 27.4642 578.84 31.7427 581.475 32.8946C584.109 34.0465 589.215 34.8694 592.179 32.8946C595.143 30.92 596.296 35.8569 597.119 36.6797C597.943 37.5023 599.425 36.6798 602.718 36.6797C606.011 36.6797 617.539 50.1741 625.114 48.1993C632.689 46.2245 630.384 44.5791 640.429 52.9717C650.473 61.3639 658.707 59.39 660.025 59.3897C660.72 59.3897 662.025 59.9627 663.148 60.5411C846.143 62.3827 1037.69 64.9834 1064.53 64.9835H0.177734C136.099 64.9833 276.15 64.6105 314.611 60.0147C322.601 59.0601 356.917 58.709 406.828 58.754C409.965 57.8571 414.107 56.938 419.268 56.2628C433.101 54.4525 458.461 50.6681 466.859 50.0098C475.258 49.3516 476.74 48.0348 478.716 46.2247C480.692 44.4144 485.138 42.1105 486.785 41.4522C488.432 40.7938 493.866 33.5531 494.689 30.92C495.513 28.2874 498.805 24.9968 499.465 24.8311C500.124 24.6666 498.971 23.5143 502.1 22.6915C505.228 21.8686 508.358 21.2102 510.005 19.5645C511.651 17.9188 512.145 13.9702 514.121 12.9825C516.097 11.9951 526.801 11.9946 529.271 8.04498C531.742 4.09542 536.353 0.804241 538.988 0.968806Z`;
+            
+            // SVG 및 그룹 요소
+            const svg = document.getElementById('ci-svg');
+            svg.setAttribute('width', svgW);
+            svg.setAttribute('height', svgH);
+            svg.setAttribute('viewBox', `0 0 ${svgW} ${svgH}`);
+            
+            // 그룹/defs가 없으면 새로 생성
+            let defs = svg.querySelector('defs');
+            if (!defs) {
+                defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                svg.prepend(defs);
+            }
+            
+            // === 산 하단 그라디언트 마스크 추가 ===
+            // 기존에 있으면 삭제 후 재생성
+            let gradMask = svg.querySelector('#mountain-grad-mask');
+            if (gradMask) gradMask.remove();
+            let grad = svg.querySelector('#mountain-grad');
+            if (grad) grad.remove();
+            
+            // linearGradient 정의 (위쪽 100% 투명도, 아래쪽 0%)
+            grad = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
+            grad.setAttribute('id', 'mountain-grad');
+            grad.setAttribute('x1', '0');
+            grad.setAttribute('y1', '0');
+            grad.setAttribute('x2', '0');
+            grad.setAttribute('y2', '1');
+            grad.setAttribute('gradientUnits', 'objectBoundingBox');
+            
+            const stop1 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop1.setAttribute('offset', '0%');
+            stop1.setAttribute('stop-color', 'white');
+            stop1.setAttribute('stop-opacity', '1');
+            
+            const stop2 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop2.setAttribute('offset', '85%');
+            stop2.setAttribute('stop-color', 'white');
+            stop2.setAttribute('stop-opacity', '1');
+            
+            const stop3 = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+            stop3.setAttribute('offset', '100%');
+            stop3.setAttribute('stop-color', 'white');
+            stop3.setAttribute('stop-opacity', '0');
+            
+            grad.appendChild(stop1);
+            grad.appendChild(stop2);
+            grad.appendChild(stop3);
+            defs.appendChild(grad);
+            
+            // 마스크 정의
+            gradMask = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
+            gradMask.setAttribute('id', 'mountain-grad-mask');
+            const gradMaskRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            gradMaskRect.setAttribute('x', 0);
+            gradMaskRect.setAttribute('y', 0);
+            gradMaskRect.setAttribute('width', svgW);
+            gradMaskRect.setAttribute('height', svgH);
+            gradMaskRect.setAttribute('fill', 'url(#mountain-grad)');
+            gradMask.appendChild(gradMaskRect);
+            defs.appendChild(gradMask);
+
+            // 산 path 크기 (Mountain_ver3 기준)
+            const mountainW = 1065, mountainH = 65;
+            const scale = 2 * Math.min(svgW * 0.7 / mountainW, svgH * 0.18 / mountainH);
+            
+            // 산 중앙 정렬 (위쪽으로 이동)
+            const offsetX = centerX - (mountainW * scale) / 2;
+            const offsetY = centerY - (mountainH * scale) / 2 - svgH * 0.1;
+            
+            // 산 path 적용
+            const mountain = document.getElementById('ci-mountain');
+            mountain.setAttribute('d', mountainPath);
+            mountain.setAttribute('transform', `translate(${offsetX},${offsetY}) scale(${scale})`);
+            
+            // Glow filter 제거
+            mountain.removeAttribute('filter');
+            mountain.style.opacity = 0;
+            
+            // === 산 하단 그라디언트 마스크 적용 ===
+            mountain.setAttribute('mask', 'url(#mountain-grad-mask)');
+            
+            // 수평선 그룹 생성 (직선, 중앙 정렬)
+            const linesGroup = document.getElementById('ci-lines-group');
+            linesGroup.innerHTML = '';
+            const lineCount = 7;
+            
+            // 산의 중앙 아래에서 시작 (산 위치 조정에 맞춰 조정)
+            const baseY = centerY + (mountainH * scale) / 2 + scale * 8 - svgH * 0.1;
+            let lines = [];
+            let lineParams = [];
+            
+            for(let i=0; i<lineCount; i++) {
+                const y = baseY + i*scale*38/2.5;
+                let thickness;
+                if(i === 0) {
+                    // 첫 번째 수평선: 두 번째보다 얇지만 기존보다 두껍게
+                    thickness = scale * 1.5;
+                } else {
+                    thickness = scale * (1 + i*4.5) / 3.5;
+                }
+                const halfWidth = (svgW*0.35 - i*scale*18/2.5);
+                const left = centerX - halfWidth;
+                const right = centerX + halfWidth;
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                line.setAttribute('x', left);
+                line.setAttribute('y', y - thickness/2);
+                line.setAttribute('width', right-left);
+                line.setAttribute('height', thickness);
+                line.setAttribute('fill', 'white');
+                line.style.opacity = 0;
+                linesGroup.appendChild(line);
+                lines.push(line);
+                lineParams.push({y, thickness, halfWidth});
+            }
+            
+            // Logo.svg 크기 동적 적용
+            const logoW = 173.93, logoH = 92.09; // Logo.svg 뷰박스 크기
+            const logoScale = 2; // 원하는 배율로 조절
+            const logoImg = document.getElementById('ci-logo-img');
+            logoImg.style.width = (logoW * logoScale) + 'px';
+            logoImg.style.height = (logoH * logoScale) + 'px';
+            
+            // === 모션 커브 함수 ===
+            // easeInOutQuint
+            const motionCurve = t => t < 0.5
+                ? 16 * t * t * t * t * t
+                : 1 + 16 * (--t) * t * t * t * t;
+            
+            // Hero 텍스트 숨김
+            document.getElementById('hero-content').style.opacity = 0;
+            
+            // === 애니메이션 시퀀스 ===
+            // 1. 산 등장 (Glow, opacity 애니메이션)
+            ciMotionTimeoutIds.push(setTimeout(()=>{
+                mountain.style.transition = 'opacity 0.7s';
+                mountain.style.opacity = 1;
+                
+                // 2. 수평선 등장+확장(동시)
+                let idx = 0;
+                function showLine() {
+                    if(idx < lineCount) {
+                        lines[idx].style.transition = 'opacity 0.5s';
+                        lines[idx].style.opacity = 1;
+                        
+                        // 등장과 동시에 확장 애니메이션 시작
+                        const duration = 700;
+                        const startHalfWidth = lineParams[idx].halfWidth;
+                        const endHalfWidth = svgW/2;
+                        const y = lineParams[idx].y;
+                        const thickness = lineParams[idx].thickness;
+                        const line = lines[idx];
+                        let start = null;
+                        
+                        function animateExpand(ts) {
+                            if(!start) start = ts;
+                            const progress = Math.min((ts-start)/duration, 1);
+                            const halfWidth = startHalfWidth + (endHalfWidth - startHalfWidth) * progress;
+                            const left = centerX - halfWidth;
+                            const right = centerX + halfWidth;
+                            line.setAttribute('x', left);
+                            line.setAttribute('width', right-left);
+                            if(progress < 1) {
+                                ciMotionFrameIds.push(requestAnimationFrame(animateExpand));
+                            }
+                        }
+                        ciMotionFrameIds.push(requestAnimationFrame(animateExpand));
+                        idx++;
+                        ciMotionTimeoutIds.push(setTimeout(showLine, 180));
+                    } else {
+                        // 3. 수평선 애니메이션 완료 후 잠시 대기
+                        ciMotionTimeoutIds.push(setTimeout(() => {
+                            // 4. 산과 수평선 Fadeout + CI Logo 등장
+                            const fadeDuration = 1000; // ms
+                            const start = performance.now();
+                            
+                            function fadeOutAndShowCI(ts) {
+                                const progress = Math.min((ts - start) / fadeDuration, 1);
+                                const curved = motionCurve(progress);
+                                
+                                // 산과 수평선 Fadeout
+                                const fadeOutOpacity = 1 - curved;
+                                document.getElementById('ci-mountain-group').style.opacity = fadeOutOpacity;
+                                document.getElementById('ci-lines-group').style.opacity = fadeOutOpacity;
+                                document.getElementById('ci-glow-group').style.opacity = fadeOutOpacity;
+                                
+                                // CI Logo Fadein
+                                document.getElementById('ci-logo-wrap').style.opacity = curved;
+                                
+                                if (progress < 1) {
+                                    ciMotionFrameIds.push(requestAnimationFrame(fadeOutAndShowCI));
+                                } else {
+                                    // 5. Hero 텍스트 등장
+                                    ciMotionTimeoutIds.push(setTimeout(() => {
+                                        document.getElementById('hero-content').style.transition = 'opacity 1s';
+                                        document.getElementById('hero-content').style.opacity = 1;
+                                        ciMotionRunning = false;
+                                        
+                                        // CI 모션 완료 후 네비게이션 바 등장
+                                        setTimeout(() => {
+                                            const navbar = document.querySelector('.navbar');
+                                            navbar.classList.add('show');
+                                            navbarInitialized = true;
+                                        }, 300);
+                                    }, 500));
+                                }
+                            }
+                            
+                            ciMotionFrameIds.push(requestAnimationFrame(fadeOutAndShowCI));
+                        }, 500)); // 수평선 완료 후 0.5초 대기
+                    }
+                }
+                showLine();
+            }, 400));
+        }
+        // ===== 이벤트 리스너 =====
+        window.addEventListener('DOMContentLoaded', () => {
+            // 그라디언트 애니메이션 초기화
+            initGradientAnimation();
+            
+            // CI 모션 시퀀스 시작
+            ciMotionSequence();
+            
+            // Core Values 애니메이션 초기화
+            handleCoreValuesAnimation();
+        });
+
+        window.addEventListener('resize', () => {
+            // 그라디언트 애니메이션 재시작
+            clearGradientAnimation();
+            initGradientAnimation();
+        });
+
+
+        // ===== CI Logo 애니메이션 =====
+        (function animateLogoDropShadow() {
+            const logo = document.getElementById('ci-logo-img');
+            if (!logo) return;
+            let t = 0;
+            function animate() {
+                t += 0.005;
+                // 0~1 사이의 투명도(진폭 0.5, 중심 0.5)
+                const alpha = 0.7 + 0.3 * Math.sin(t);
+                logo.style.filter = `drop-shadow(0 0 12px rgba(169,160,212,${alpha})) drop-shadow(0 0 64px rgba(236,234,247,${alpha}))`;
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+
+
+        // ===== 네비게이션 바 제어 =====
+        // 네비게이션 바 스크롤 제어 함수
+        function handleNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // 네비게이션 바가 초기화되지 않았으면 스크롤 제어하지 않음
+            if (!navbarInitialized) {
+                return;
+            }
+            
+            // 스크롤 방향 감지
+            if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+                // 아래로 스크롤할 때 (100px 이상 스크롤된 후)
+                navbar.classList.remove('show');
+                navbar.classList.add('hide');
+            } else if (currentScrollTop < lastScrollTop) {
+                // 위로 스크롤할 때
+                navbar.classList.remove('hide');
+                navbar.classList.add('show');
+            }
+            
+            lastScrollTop = currentScrollTop;
+        }
+
+        // 스크롤 이벤트 리스너 추가
+        window.addEventListener('scroll', handleNavbarScroll);
+
+
+
+        // ===== Core Values 애니메이션 =====
+        // Core Values 스크롤 애니메이션
+        function handleCoreValuesAnimation() {
+            const coreTitle = document.querySelector('.core-title');
+            const coreValues = document.querySelectorAll('.core-value');
+            
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // 제목 애니메이션
+                        if (entry.target.classList.contains('core-title')) {
+                            entry.target.classList.add('animate');
+                        }
+                        
+                        // 각 core-value 애니메이션 (순차적으로)
+                        if (entry.target.classList.contains('core-values')) {
+                            coreValues.forEach((value, index) => {
+                                setTimeout(() => {
+                                    value.classList.add('animate');
+                                }, index * 200); // 200ms 간격으로 순차 등장
+                            });
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            // 관찰 대상 등록
+            if (coreTitle) observer.observe(coreTitle);
+            const coreValuesSection = document.querySelector('.core-values');
+            if (coreValuesSection) observer.observe(coreValuesSection);
+        }
+
+        // ===== 모바일 메뉴 =====
+        // 햄버거 메뉴 토글 스크립트
+        document.getElementById('navbar-hamburger').addEventListener('click', function() {
+            const menu = document.getElementById('navbar-mobile-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        });
+
+        window.addEventListener('resize', function() {
+            if(window.innerWidth > 900) {
+                document.getElementById('navbar-mobile-menu').style.display = 'none';
+            }
+        });
+
+        // ===== 스크롤 함수 =====
+        // 부드러운 스크롤 함수
+        function scrollToNextSection(sectionId) {
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                const targetPosition = targetSection.offsetTop;
+                const startPosition = window.pageYOffset;
+                const distance = targetPosition - startPosition;
+                const duration = 1000; // 1초
+                let start = null;
+                
+                console.log('Scrolling to:', sectionId, 'Target position:', targetPosition, 'Distance:', distance);
+                
+                function animation(currentTime) {
+                    if (start === null) start = currentTime;
+                    const timeElapsed = currentTime - start;
+                    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+                
+                // easeInOutCubic 함수
+                function easeInOutCubic(t, b, c, d) {
+                    t /= d / 2;
+                    if (t < 1) return c / 2 * t * t * t + b;
+                    t -= 2;
+                    return c / 2 * (t * t * t + 2) + b;
+                }
+                
+                requestAnimationFrame(animation);
+            } else {
+                console.error('Section not found:', sectionId);
+            }
+        }
+
+        // ===== Wave 섹션 애니메이션 =====
+        // wave-intro 등장 모션
+        window.addEventListener('DOMContentLoaded', () => {
+            const introEls = [
+                document.querySelector('.wave-intro-en'),
+                document.querySelector('.wave-intro-title'),
+                document.querySelector('.wave-intro-desc')
+            ];
+            introEls.forEach((el, idx) => {
+                if (el) setTimeout(() => el.classList.add('show'), 200 + idx * 350);
+            });
+        });
+
+        // wave-logo 스크롤 등장 모션
+        function handleWaveLogoAppear() {
+            const logo = document.querySelector('.wave-logo');
+            if (!logo) return;
+            const rect = logo.getBoundingClientRect();
+            const windowH = window.innerHeight || document.documentElement.clientHeight;
+            if (rect.top < windowH * 0.85) {
+                logo.classList.add('show');
+                window.removeEventListener('scroll', handleWaveLogoAppear);
+            }
+        }
+        window.addEventListener('scroll', handleWaveLogoAppear);
+        window.addEventListener('DOMContentLoaded', handleWaveLogoAppear);
+</script>
+</html>
