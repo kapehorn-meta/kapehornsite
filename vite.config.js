@@ -1,21 +1,33 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import path from 'path';
 
 export default defineConfig({
   root: '.',
+  publicDir: 'public',
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'index.html')
+        main: path.resolve(__dirname, 'index.html')
       }
     }
   },
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "src/styles/base/variables"; @import "src/styles/base/mixins";`
+        includePaths: [path.resolve(__dirname, 'src/styles/base')],
+        additionalData: `@import "_variables"; @import "_mixins";`
       }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@styles': path.resolve(__dirname, 'src/styles'),
+      '@scripts': path.resolve(__dirname, 'src/scripts'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@assets': path.resolve(__dirname, 'src/assets')
     }
   },
   server: {

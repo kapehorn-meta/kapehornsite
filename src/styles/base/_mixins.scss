@@ -1,58 +1,25 @@
-// ===== Mixins & Utilities =====
+/* ===== Sass Mixins ===== */
 
-// Media Query Mixins
-@mixin mobile-up {
-  @media (min-width: map-get($breakpoints, sm)) {
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: 600px) {
     @content;
   }
 }
 
-@mixin tablet-up {
-  @media (min-width: map-get($breakpoints, md)) {
+@mixin tablet {
+  @media (max-width: 900px) {
     @content;
   }
 }
 
-@mixin desktop-up {
-  @media (min-width: map-get($breakpoints, lg)) {
+@mixin desktop {
+  @media (min-width: 901px) {
     @content;
   }
 }
 
-@mixin large-desktop-up {
-  @media (min-width: map-get($breakpoints, xl)) {
-    @content;
-  }
-}
-
-@mixin mobile-only {
-  @media (max-width: map-get($breakpoints, md) - 1px) {
-    @content;
-  }
-}
-
-@mixin tablet-only {
-  @media (min-width: map-get($breakpoints, md)) and (max-width: map-get($breakpoints, lg) - 1px) {
-    @content;
-  }
-}
-
-// Typography Mixins
-@mixin heading($size, $weight: medium) {
-  font-size: font-size($size);
-  font-weight: font-weight($weight);
-  line-height: line-height(tight);
-  margin: 0;
-}
-
-@mixin body-text($size: d3, $weight: normal) {
-  font-size: font-size($size);
-  font-weight: font-weight($weight);
-  line-height: line-height(loose);
-  margin: 0;
-}
-
-// Layout Mixins
+// Flexbox utilities
 @mixin flex-center {
   display: flex;
   align-items: center;
@@ -65,110 +32,23 @@
   justify-content: space-between;
 }
 
-@mixin absolute-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@mixin full-size {
-  width: 100%;
-  height: 100%;
-}
-
-// Button Mixins
+// Button styles
 @mixin button-base {
   border: none;
-  border-radius: radius(md);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: all transition(normal);
-  font-family: inherit;
+  transition: all var(--transition-normal);
+  font-weight: 600;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
 }
 
-@mixin button-primary {
-  @include button-base;
-  background: color(primary-light);
-  backdrop-filter: blur(10px);
-  color: color(white);
-  border: 1px solid color(primary-border);
-  box-shadow: 0 8px 32px color(primary-light);
-  padding: spacing(md) spacing(2xl);
-  
-  &:hover {
-    background: rgba(122, 95, 255, 0.3);
-    border-color: rgba(122, 95, 255, 0.5);
-    box-shadow: 0 12px 40px rgba(122, 95, 255, 0.3);
-    transform: translateY(-2px);
-  }
-}
-
-@mixin button-glass {
-  @include button-base;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  color: color(white);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: shadow(lg);
-  padding: spacing(md) spacing(xl);
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px);
-  }
-}
-
-// Animation Mixins
-@mixin fade-in($duration: 0.8s, $delay: 0s) {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all $duration cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: $delay;
-  
-  &.animate,
-  &.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@mixin hover-lift($distance: -8px) {
-  transition: transform transition(normal);
-  
-  &:hover {
-    transform: translateY($distance);
-  }
-}
-
-// Glass Effect Mixin
-@mixin glass-effect($opacity: 0.1, $blur: 10px) {
+// Glass effect
+@mixin glass-effect($opacity: 0.1) {
   background: rgba(255, 255, 255, $opacity);
-  backdrop-filter: blur($blur);
-  -webkit-backdrop-filter: blur($blur);
-  border: 1px solid rgba(255, 255, 255, $opacity * 2);
-}
-
-// Section Mixins
-@mixin section-base {
-  width: 100%;
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-@mixin section-padding {
-  padding: spacing(5xl) spacing(2xl);
-  
-  @include mobile-only {
-    padding: spacing(4xl) spacing(lg);
-  }
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
