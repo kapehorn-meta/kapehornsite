@@ -1,0 +1,22 @@
+{
+  "name": "kapehorn-website",
+  "version": "1.0.0",
+  "description": "Kapehorn company website - immersive social content for spatial computing",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server . -p 3000 -o",
+    "start": "npx http-server . -p 3000",
+    "build": "echo 'Static website - no build step required'"
+  },
+  "keywords": [
+    "spatial-computing",
+    "vr",
+    "immersive",
+    "social-content"
+  ],
+  "author": "Kapehorn Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
