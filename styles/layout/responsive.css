@@ -1,23 +1,62 @@
 /* ===== Responsive Design ===== */
 
-/* Tablet and Small Desktop */
+/* Base font size scaling */
+html {
+  font-size: 16px; /* Base size for desktop */
+}
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1199px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Tablet */
 @media (max-width: 900px) {
   html {
-    font-size: 12px;
+    font-size: 15px;
   }
   
   /* Typography Adjustments */
-  .H1 { font-size: 2.75rem; }
-  .H2 { font-size: 2.25rem; }
-  .H3 { font-size: 1.5rem; }
-  .H4 { font-size: 1.1rem; }
-  .H5 { font-size: 1rem; }
-  .H6 { font-size: 0.9rem; }
+  .H1 { font-size: 3.2rem; }
+  .H2 { font-size: 2.4rem; }
+  .H3 { font-size: 1.8rem; }
+  .H4 { font-size: 1.3rem; }
+  .H5 { font-size: 1.1rem; }
+  .H6 { font-size: 1rem; }
   .D1 { font-size: 1.2rem; }
-  .D2 { font-size: 1rem; }
-  .D3 { font-size: 0.85rem; }
-  .D4 { font-size: 0.75rem; }
-  .BTN { font-size: 0.95rem; }
+  .D2 { font-size: 1.05rem; }
+  .D3 { font-size: 0.95rem; }
+  .D4 { font-size: 0.85rem; }
+  .BTN { font-size: 1rem; }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+  }
+  
+  .hero-title {
+    font-size: 3.2rem;
+    margin-bottom: 24px;
+  }
+  
+  .hero-desc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  
+  #ci-logo-img {
+    width: 320px !important;
+    height: 169.5px !important;
+  }
   
   /* Content Section */
   .contents-section {
@@ -26,195 +65,487 @@
   }
   
   .content-card { 
-    min-height: 48vw; 
-    height: 48vw; 
+    min-height: 100vh;
+    height: 100vh;
+    aspect-ratio: unset;
   }
   
   .content-info { 
-    padding: 28px 4vw 18px 4vw; 
+    padding: 32px 6vw 24px 6vw;
+    background: linear-gradient(to bottom, rgba(20, 20, 30, 0.2) 0%, rgba(20, 20, 30, 0.75) 100%);
   }
   
   .game-logo {
-    width: 60vw;
-    max-width: 90vw;
+    width: 65vw;
+    max-width: 340px;
+    margin-bottom: 28px;
   }
   
-  .btn-download, 
-  .btn-discord { 
-    padding: 10px 18px; 
+  .content-info .title {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+  
+  .content-info .desc {
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  
+  .btn-quest {
+    padding: 14px 32px;
+    font-size: 1rem;
   }
   
   /* Core Values */
   .core-title {
-    margin-bottom: var(--spacing-xl);
+    font-size: 3.2rem;
+    margin-bottom: 48px;
   }
   
   .core-values {
     flex-direction: column;
     align-items: center;
-    gap: var(--spacing-xl);
+    gap: 24px;
     max-width: 100%;
+    padding: 0 20px;
   }
   
   .core-value {
-    padding: var(--spacing-lg) var(--spacing-md);
-    min-width: 0;
+    padding: 28px 24px;
     width: 90%;
-    max-width: 400px;
-    margin-bottom: 20px;
+    max-width: 420px;
+    margin: 0 0 16px 0;
   }
   
   .core-value-title {
-    margin-bottom: var(--spacing-md);
-    font-size: 1.44rem;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
   }
   
   .core-value-desc {
-    font-size: 0.95rem;
-    font-weight: 320;
-    height: 4.5em;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    height: auto;
+    min-height: 4em;
   }
   
   .core-values-section {
-    padding: 0px 0 var(--spacing-2xl) 0;
+    padding: 60px 0 80px 0;
   }
   
   /* Wave Section */
   .wave-section {
-    padding: var(--spacing-5xl) 20px;
+    padding: 80px 24px 120px 24px;
     min-height: 100vh;
-    min-width: 0;
-    max-width: 100%;
+  }
+  
+  .wave-intro {
+    margin-bottom: 120px;
+    max-width: 600px;
+  }
+  
+  .wave-intro-en {
+    font-size: 1.2rem;
+  }
+  
+  .wave-intro-title {
+    font-size: 2.4rem;
+    margin-bottom: 24px;
+  }
+  
+  .wave-intro-desc {
+    font-size: 1.05rem;
+    line-height: 1.8;
   }
   
   .wave-inner {
-    min-height: 280px;
+    min-height: 320px;
+    margin-top: 60px;
   }
   
   .wave-logo {
-    width: 260px;
-    top: -120px;
+    width: 300px;
+    margin-bottom: -120px;
   }
   
   .join-title {
-    font-size: 2.1rem;
+    font-size: 3.2rem;
+    line-height: 1.2;
   }
   
   .join-desc {
-    font-size: 1.1rem;
-    margin-bottom: 18px;
+    font-size: 1.2rem;
+    margin-bottom: 24px;
   }
   
   .join-btn {
     font-size: 1rem;
-    padding: 12px var(--spacing-xl);
-  }
-  
-  .footer-section { 
-    padding: 12px 6px; 
-  }
-  
-  /* Navigation */
-  .navbar-menu { 
-    display: none; 
-  }
-  
-  .navbar-hamburger { 
-    display: block !important; 
-  }
-  
-  /* Hero Logo */
-  #ci-logo-img {
-    width: 293.51px !important;
-    height: 155.40px !important;
+    padding: 16px 40px;
   }
 }
 
 /* Mobile */
 @media (max-width: 600px) {
   html {
-    font-size: 12px;
+    font-size: 14px;
   }
   
   /* Typography */
-  .H1 { font-size: 2rem; }
-  .H2 { font-size: 1.25rem; }
-  .H3 { font-size: 1rem; }
-  .H4 { font-size: 0.95rem; }
-  .H5 { font-size: 0.85rem; }
-  .H6 { font-size: 0.75rem; }
-  .D1 { font-size: 1rem; }
-  .D2 { font-size: 0.85rem; }
-  .D3 { font-size: 0.75rem; }
-  .D4 { font-size: 0.65rem; }
-  .BTN { font-size: 0.8rem; }
+  .H1 { font-size: 2.8rem; }
+  .H2 { font-size: 2rem; }
+  .H3 { font-size: 1.6rem; }
+  .H4 { font-size: 1.2rem; }
+  .H5 { font-size: 1rem; }
+  .H6 { font-size: 0.9rem; }
+  .D1 { font-size: 1.1rem; }
+  .D2 { font-size: 1rem; }
+  .D3 { font-size: 0.9rem; }
+  .D4 { font-size: 0.8rem; }
+  .BTN { font-size: 0.9rem; }
   
   /* Hero */
   .hero-title {
-    font-size: 1.25rem;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  
+  .hero-desc {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  #ci-logo-img {
+    width: 260px !important;
+    height: 137.7px !important;
+  }
+  
+  /* Content Section */
+  .content-info {
+    padding: 28px 20px 20px 20px;
+    background: linear-gradient(to bottom, rgba(20, 20, 30, 0.3) 0%, rgba(20, 20, 30, 0.8) 100%);
+  }
+  
+  .game-logo {
+    width: 75vw;
+    max-width: 280px;
+    margin-bottom: 24px;
+  }
+  
+  .content-info .title {
+    font-size: 2rem;
+    margin-bottom: 16px;
+  }
+  
+  .content-info .desc {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  
+  .btn-quest {
+    padding: 12px 28px;
+    font-size: 0.9rem;
+    min-width: 200px;
   }
   
   /* Core Values */
   .core-title {
-    font-size: 2.25rem;
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+  }
+  
+  .core-values {
+    padding: 0 16px;
+    gap: 20px;
+  }
+  
+  .core-value {
+    padding: 24px 20px;
+    width: 95%;
+    max-width: 360px;
+    margin: 0 0 12px 0;
   }
   
   .core-value-title {
-    font-size: 1.28rem;
+    font-size: 1.6rem;
+    margin-bottom: 14px;
   }
   
   .core-value-desc {
-    font-size: 0.8rem;
-    font-weight: 320;
-    height: 4.5em;
+    font-size: 1rem;
+    line-height: 1.6;
+    height: auto;
+    min-height: 3.5em;
+  }
+  
+  .core-values-section {
+    padding: 50px 0 70px 0;
   }
   
   /* Wave Section */
+  .wave-section {
+    padding: 70px 20px 100px 20px;
+  }
+  
+  .wave-intro {
+    margin-bottom: 100px;
+    max-width: 100%;
+  }
+  
+  .wave-intro-en {
+    font-size: 1.1rem;
+  }
+  
+  .wave-intro-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .wave-intro-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
   .wave-inner {
-    min-height: 160px;
+    min-height: 280px;
+    margin-top: 40px;
   }
   
   .wave-logo {
-    width: 150px;
-    top: -60px;
+    width: 240px;
+    margin-bottom: -100px;
   }
   
   .join-title {
-    font-size: 1.2rem;
+    font-size: 2.8rem;
+    line-height: 1.1;
   }
   
   .join-desc {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .join-btn {
+    font-size: 0.9rem;
+    padding: 14px 36px;
+  }
+  
+  /* Footer */
+  .footer-section {
+    padding: 16px 20px;
     font-size: 0.8rem;
+  }
+  
+  .footer-right {
+    gap: 16px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+  
+  /* Typography */
+  .H1 { font-size: 2.4rem; }
+  .H2 { font-size: 1.8rem; }
+  .H3 { font-size: 1.4rem; }
+  .H4 { font-size: 1.1rem; }
+  .H5 { font-size: 0.95rem; }
+  .H6 { font-size: 0.85rem; }
+  .D1 { font-size: 1rem; }
+  .D2 { font-size: 0.95rem; }
+  .D3 { font-size: 0.85rem; }
+  .D4 { font-size: 0.75rem; }
+  .BTN { font-size: 0.85rem; }
+  
+  /* Hero */
+  .hero-title {
+    font-size: 2.4rem;
+    margin-bottom: 18px;
+  }
+  
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+  
+  #ci-logo-img {
+    width: 220px !important;
+    height: 116.5px !important;
+  }
+  
+  /* Content Section */
+  .content-info {
+    padding: 24px 16px 18px 16px;
+  }
+  
+  .game-logo {
+    width: 80vw;
+    max-width: 240px;
+    margin-bottom: 20px;
+  }
+  
+  .content-info .title {
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+  }
+  
+  .content-info .desc {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  
+  .btn-quest {
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    min-width: 180px;
+  }
+  
+  /* Core Values */
+  .core-title {
+    font-size: 2.4rem;
+    margin-bottom: 36px;
+  }
+  
+  .core-values {
+    padding: 0 12px;
+    gap: 16px;
+  }
+  
+  .core-value {
+    padding: 20px 16px;
+    width: 98%;
+    max-width: 320px;
+    margin: 0 0 8px 0;
+  }
+  
+  .core-value-title {
+    font-size: 1.4rem;
     margin-bottom: 12px;
+  }
+  
+  .core-value-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    min-height: 3em;
+  }
+  
+  .core-values-section {
+    padding: 40px 0 60px 0;
+  }
+  
+  /* Wave Section */
+  .wave-section {
+    padding: 60px 16px 80px 16px;
+  }
+  
+  .wave-intro {
+    margin-bottom: 80px;
+  }
+  
+  .wave-intro-en {
+    font-size: 1rem;
+  }
+  
+  .wave-intro-title {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+  }
+  
+  .wave-intro-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .wave-inner {
+    min-height: 240px;
+    margin-top: 30px;
+  }
+  
+  .wave-logo {
+    width: 200px;
+    margin-bottom: -80px;
+  }
+  
+  .join-title {
+    font-size: 2.4rem;
+    line-height: 1.05;
+  }
+  
+  .join-desc {
+    font-size: 1rem;
+    margin-bottom: 18px;
   }
   
   .join-btn {
     font-size: 0.85rem;
-    padding: var(--spacing-sm) 18px;
+    padding: 12px 32px;
   }
   
-  .wave-section {
-    padding: 120px var(--spacing-sm) 100px var(--spacing-sm);
-  }
-  
-  .wave-intro {
-    margin-bottom: var(--spacing-2xl);
-  }
-  
-  .wave-intro-title { 
-    font-size: 1.5rem; 
-  }
-  
-  .wave-intro-desc { 
-    font-size: 0.95rem; 
-  }
-  
+  /* Footer */
   .footer-section {
-    font-size: 0.625rem;
+    padding: 14px 16px;
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .footer-right {
+    gap: 14px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  html {
+    font-size: 12px;
+  }
+  
+  /* Hero */
+  .hero-title {
+    font-size: 2.2rem;
   }
   
   #ci-logo-img {
-    width: 195.67px !important;
-    height: 103.60px !important;
+    width: 190px !important;
+    height: 100.6px !important;
+  }
+  
+  /* Content */
+  .game-logo {
+    width: 85vw;
+    max-width: 200px;
+  }
+  
+  .content-info .title {
+    font-size: 1.6rem;
+  }
+  
+  /* Core Values */
+  .core-title {
+    font-size: 2.2rem;
+  }
+  
+  .core-value-title {
+    font-size: 1.3rem;
+  }
+  
+  /* Wave Section */
+  .wave-intro-title {
+    font-size: 1.6rem;
+  }
+  
+  .wave-logo {
+    width: 180px;
+    margin-bottom: -70px;
+  }
+  
+  .join-title {
+    font-size: 2.2rem;
   }
 }
