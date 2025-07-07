@@ -1,0 +1,29 @@
+/* ===== Footer ===== */
+.footer-section {
+  background: var(--gradient-footer);
+  color: var(--color-blue-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px var(--spacing-md);
+  border-top: 1px solid #1a2e3b;
+}
+
+.footer-left {
+  font-weight: 500;
+}
+
+.footer-right {
+  display: flex;
+  gap: 18px;
+}
+
+.footer-right a {
+  color: var(--color-blue-light);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.footer-right a:hover {
+  color: var(--color-primary);
+}

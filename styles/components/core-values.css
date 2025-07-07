@@ -1,0 +1,82 @@
+/* ===== Core Values Section ===== */
+.core-values-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--gradient-core-values);
+  color: var(--color-white);
+  padding: 0 0 20px 0;
+  text-align: center;
+}
+
+.core-title {
+  letter-spacing: 2.5px;
+  margin-bottom: 60px;
+  margin-top: -20px;
+}
+
+.core-values {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.core-value {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: none;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  margin: 0 var(--spacing-md);
+  transition: all var(--transition-slow);
+}
+
+.core-value:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-xl);
+}
+
+.core-value-title {
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.25;
+  text-align: center;
+  font-size: 1.28rem;
+  transition: color var(--transition-normal);
+}
+
+.core-value:hover .core-value-title {
+  color: var(--color-primary);
+}
+
+.core-value-desc {
+  color: var(--color-blue-light);
+  line-height: 1.7;
+  text-align: center;
+  margin-top: 0;
+  font-size: 1.1rem;
+  font-weight: 320;
+  transition: color var(--transition-normal);
+  height: 4.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.core-value:hover .core-value-desc {
+  color: var(--color-white);
+}

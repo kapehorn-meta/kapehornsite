@@ -1,0 +1,119 @@
+/* ===== Wave Section ===== */
+.wave-section {
+  background: var(--gradient-wave);
+  color: var(--color-white);
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--spacing-5xl) var(--spacing-2xl) 180px var(--spacing-2xl);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.wave-intro {
+  max-width: 700px;
+  margin: 0 auto 200px auto;
+  text-align: center;
+  color: var(--color-white);
+  z-index: 2;
+  position: relative;
+}
+
+.wave-intro-en {
+  font-size: 1.3rem;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.04em;
+}
+
+.wave-intro-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xl);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.wave-intro-desc {
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 2;
+  opacity: 0.92;
+  letter-spacing: 0.01em;
+}
+
+.wave-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 0;
+  position: relative;
+  min-height: 420px;
+  margin-top: 100px;
+}
+
+.wave-logo {
+  width: 420px;
+  max-width: 98vw;
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  z-index: 0;
+  margin-bottom: -160px;
+}
+
+.join-title,
+.join-desc,
+.join-btn {
+  position: relative;
+  z-index: 2;
+}
+
+.join-title {
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: var(--color-white);
+  margin-bottom: 0;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.join-desc {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-blue-medium);
+  margin-bottom: var(--spacing-lg);
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.join-btn {
+  background: transparent;
+  color: var(--color-white);
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  padding: 18px 56px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-top: var(--spacing-sm);
+  box-shadow: none;
+}
+
+.join-btn:hover {
+  background: rgba(122,95,255,0.12);
+  border-color: var(--color-white);
+}

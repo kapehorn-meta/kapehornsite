@@ -1,0 +1,185 @@
+/* ===== CSS Custom Properties ===== */
+:root {
+  /* Colors */
+  --color-primary: #7A5FFF;
+  --color-primary-light: rgba(122, 95, 255, 0.2);
+  --color-primary-border: rgba(122, 95, 255, 0.3);
+  --color-secondary: #FF69B4;
+  --color-secondary-light: rgba(255, 105, 180, 0.2);
+  --color-secondary-border: rgba(255, 105, 180, 0.3);
+  --color-discord: #5865F2;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-gray-100: #f8f9fa;
+  --color-gray-200: #e9ecef;
+  --color-gray-300: #dee2e6;
+  --color-gray-400: #ced4da;
+  --color-gray-500: #adb5bd;
+  --color-gray-600: #6c757d;
+  --color-gray-700: #495057;
+  --color-gray-800: #343a40;
+  --color-gray-900: #212529;
+  --color-blue-light: #c7e0ff;
+  --color-blue-medium: #e0e6ed;
+  
+  /* Gradients */
+  --gradient-hero-1: #37AFFF;
+  --gradient-hero-2: #5897FF;
+  --gradient-hero-3: #7C7EFF;
+  --gradient-core-values: linear-gradient(180deg, #0a223a 0%, #08141c 100%);
+  --gradient-wave: linear-gradient(180deg, #08141c 0%, #030f1a 100%);
+  --gradient-footer: #010911;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 40px;
+  --spacing-3xl: 48px;
+  --spacing-4xl: 64px;
+  --spacing-5xl: 80px;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 12px 40px rgba(0, 0, 0, 0.15);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.6s ease;
+  --transition-smooth: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  /* Z-index */
+  --z-navbar: 100;
+  --z-mobile-menu: 199;
+  --z-mobile-toggle: 201;
+  --z-hero-gradient: 2;
+  --z-hero-visual: 2;
+  --z-hero-logo: 10;
+  --z-hero-content: 4;
+  --z-section-arrow: 10;
+}
+
+/* ===== Global Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Urbanist', Arial, sans-serif;
+  background: var(--color-white);
+  color: #111;
+  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-size: 1rem;
+  width: 100%;
+  line-height: 1.5;
+}
+
+/* ===== Common Section Styles ===== */
+section {
+  width: 100%;
+  position: relative;
+}
+
+.contents-section,
+.core-values-section,
+.wave-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ===== Section Arrows ===== */
+.section-arrow {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  z-index: var(--z-section-arrow);
+  padding: 10px;
+}
+
+.contents-section .section-arrow,
+.core-values-section .section-arrow,
+.wave-section .section-arrow {
+  bottom: 60px;
+}
+
+.section-arrow:hover {
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.section-arrow .material-symbols-outlined {
+  color: var(--color-white);
+  font-size: 32px;
+  transition: transform var(--transition-normal);
+  text-shadow: var(--shadow-sm);
+}
+
+.section-arrow:hover .material-symbols-outlined {
+  transform: translateY(3px);
+}
+
+.hero .section-arrow .material-symbols-outlined {
+  color: var(--color-white);
+}
+
+/* ===== Material Icons ===== */
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 48px;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+  font-size: 48px;
+  display: inline-block;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}

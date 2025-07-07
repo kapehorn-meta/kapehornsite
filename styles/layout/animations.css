@@ -1,0 +1,96 @@
+/* ===== Animation Definitions ===== */
+
+/* Core Values Animations */
+.core-title {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.core-title.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.core-value {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all var(--transition-slow);
+}
+
+.core-value.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.core-value:hover {
+  transform: translateY(-8px);
+}
+
+/* Wave Intro Animations */
+.wave-intro-appear { 
+  opacity: 0; 
+  transform: translateY(40px); 
+  transition: all 0.8s cubic-bezier(0.4,0,0.2,1); 
+}
+
+.wave-intro-appear.show { 
+  opacity: 1; 
+  transform: translateY(0); 
+}
+
+.wave-intro-en { 
+  transition-delay: 0.1s; 
+}
+
+.wave-intro-title { 
+  transition-delay: 0.5s; 
+}
+
+.wave-intro-desc { 
+  transition-delay: 0.9s; 
+}
+
+/* Wave Logo Animation */
+.wave-logo { 
+  opacity: 0; 
+  transform: scale(0.92) translateY(40px); 
+  transition: all 1s cubic-bezier(0.4,0,0.2,1); 
+}
+
+.wave-logo.show { 
+  opacity: 1; 
+  transform: scale(1) translateY(0); 
+}
+
+/* Button Hover Effects */
+.btn-download::before,
+.btn-quest::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-download:hover::before,
+.btn-quest:hover::before {
+  left: 100%;
+}
+
+/* Navbar Animations */
+.navbar {
+  transform: translateY(-100%);
+  transition: transform var(--transition-smooth);
+}
+
+.navbar.show {
+  transform: translateY(0);
+}
+
+.navbar.hide {
+  transform: translateY(-100%);
+}
