@@ -100,7 +100,7 @@
   }
   
   .navbar-logo {
-    height: 28px;
+    height: 24px;
   }
   
   .navbar-menu { 
@@ -109,13 +109,13 @@
   
   .navbar-hamburger { 
     display: block;
-    font-size: 32px;
+    font-size: 24px;
     right: 16px;
-    padding: 10px;
+    padding: 8px;
   }
   
   .navbar-hamburger .material-symbols-outlined {
-    font-size: 32px;
+    font-size: 24px;
   }
   
   .navbar-mobile-menu {
@@ -130,17 +130,17 @@
   }
   
   .navbar-logo {
-    height: 24px;
+    height: 20px;
   }
   
   .navbar-hamburger {
-    font-size: 36px;
+    font-size: 22px;
     right: 12px;
-    padding: 12px;
+    padding: 6px;
   }
   
   .navbar-hamburger .material-symbols-outlined {
-    font-size: 36px;
+    font-size: 22px;
   }
   
   .navbar-mobile-menu {
@@ -162,17 +162,17 @@
   }
   
   .navbar-logo {
-    height: 22px;
+    height: 18px;
   }
   
   .navbar-hamburger {
-    font-size: 40px;
+    font-size: 20px;
     right: 10px;
-    padding: 14px;
+    padding: 5px;
   }
   
   .navbar-hamburger .material-symbols-outlined {
-    font-size: 40px;
+    font-size: 20px;
   }
   
   .navbar-mobile-menu {
