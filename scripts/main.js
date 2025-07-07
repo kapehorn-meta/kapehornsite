@@ -23,6 +23,12 @@ class KapehornApp {
   
   initializeComponents() {
     // Initialize utility components
+    this.components.performanceMonitor = new PerformanceMonitor();
+    this.components.performanceMonitor.init();
+    
+    // Initialize accessibility helpers
+    AccessibilityHelpers.init();
+    
     this.components.navbar = new Navbar();
     this.components.navbar.init();
     

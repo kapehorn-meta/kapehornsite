@@ -111,6 +111,12 @@
   transition: all var(--transition-fast);
   margin-top: var(--spacing-sm);
   box-shadow: none;
+  outline: none;
+}
+
+.join-btn:focus {
+  outline: 2px solid var(--color-white);
+  outline-offset: 2px;
 }
 
 .join-btn:hover {

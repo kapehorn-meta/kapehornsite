@@ -22,11 +22,19 @@ class MobileMenu {
   toggleMenu() {
     this.isOpen = !this.isOpen;
     this.menu.style.display = this.isOpen ? 'block' : 'none';
+    
+    // Update ARIA attributes for accessibility
+    this.toggle.setAttribute('aria-expanded', this.isOpen.toString());
+    this.menu.setAttribute('aria-hidden', (!this.isOpen).toString());
   }
   
   closeMenu() {
     this.isOpen = false;
     this.menu.style.display = 'none';
+    
+    // Update ARIA attributes
+    this.toggle.setAttribute('aria-expanded', 'false');
+    this.menu.setAttribute('aria-hidden', 'true');
   }
   
   handleResize() {

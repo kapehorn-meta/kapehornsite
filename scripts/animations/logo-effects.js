@@ -31,6 +31,12 @@ class LogoEffects {
   animate() {
     if (!this.isRunning || !this.logo) return;
     
+    // Performance optimization: skip frames if tab is not visible
+    if (document.hidden) {
+      this.animationId = requestAnimationFrame(() => this.animate());
+      return;
+    }
+    
     this.time += 0.005;
     
     // Calculate pulsing alpha (0.7 to 1.0)

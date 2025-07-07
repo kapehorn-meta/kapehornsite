@@ -52,6 +52,12 @@ class GradientBackground {
   animate() {
     if (!this.isRunning) return;
     
+    // Performance optimization: skip frames if tab is not visible
+    if (document.hidden) {
+      this.animationId = requestAnimationFrame(() => this.animate());
+      return;
+    }
+    
     const width = this.canvas.width;
     const height = this.canvas.height;
     
