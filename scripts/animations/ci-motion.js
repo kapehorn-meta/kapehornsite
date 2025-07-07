@@ -123,13 +123,11 @@ class CIMotion {
     
     // Adjust mountain scale for mobile
     const isMobile = svgW <= 600;
-    const widthFactor = isMobile ? 0.9 : 0.7;
+    const widthFactor = isMobile ? 0.8 : 0.7;
     const heightFactor = isMobile ? 0.15 : 0.18;
     const scale = 2 * Math.min(svgW * widthFactor / mountainW, svgH * heightFactor / mountainH);
     
-    // Ensure mountain is centered and doesn't clip
-    const scaledWidth = mountainW * scale;
-    const offsetX = Math.max(0, centerX - scaledWidth / 2);
+    const offsetX = centerX - (mountainW * scale) / 2;
     const offsetY = centerY - (mountainH * scale) / 2 - (isMobile ? svgH * 0.05 : svgH * 0.1);
     
     DOMHelpers.setAttributes(mountain, {
@@ -154,12 +152,10 @@ class CIMotion {
     const centerY = svgH / 2;
     
     const { WIDTH: mountainW, HEIGHT: mountainH } = CONSTANTS.MOUNTAIN_DIMENSIONS;
-    const isMobile = svgW <= 600;
-    const widthFactor = isMobile ? 0.9 : 0.7;
-    const heightFactor = isMobile ? 0.15 : 0.18;
-    const scale = 2 * Math.min(svgW * widthFactor / mountainW, svgH * heightFactor / mountainH);
+    const scale = 2 * Math.min(svgW * 0.7 / mountainW, svgH * 0.18 / mountainH);
     
     // Adjust baseY for mobile screens
+    const isMobile = svgW <= 600;
     const baseYOffset = isMobile ? svgH * 0.05 : svgH * 0.1;
     const baseY = centerY + (mountainH * scale) / 2 + scale * 8 - baseYOffset;
     const lineCount = 7;
