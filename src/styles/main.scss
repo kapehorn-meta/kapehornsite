@@ -1,106 +1,22 @@
 // ===== Main Stylesheet =====
 
 // Base styles
+@import 'base/variables';
+@import 'base/mixins';
 @import 'base/reset';
 @import 'base/typography';
 
-// Layout
-@import 'layout/grid';
-@import 'layout/animations';
-@import 'layout/responsive';
-
 // Components
 @import 'components/navbar';
-@import 'components/hero';
-@import 'components/content-card';
-@import 'components/core-values';
-@import 'components/wave-section';
-@import 'components/footer';
 @import 'components/buttons';
 
-// Utilities
-@import 'utilities/helpers';
+// Layout utilities
+@import 'layout/animations';
+@import 'layout/sections';
 
-/* ===== Common Section Styles ===== */
-section {
-  width: 100%;
-  position: relative;
-}
-
-.contents-section,
-.core-values-section,
-.wave-section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-/* ===== Section Arrows ===== */
-.section-arrow {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  z-index: var(--z-section-arrow);
-  padding: 10px;
-}
-
-.contents-section .section-arrow,
-.core-values-section .section-arrow,
-.wave-section .section-arrow {
-  bottom: 60px;
-}
-
-.section-arrow:hover {
-  transform: translateX(-50%) translateY(-5px);
-}
-
-.section-arrow .material-symbols-outlined {
-  color: var(--color-white);
-  font-size: 32px;
-  transition: transform var(--transition-normal);
-  text-shadow: var(--shadow-sm);
-}
-
-.section-arrow:hover .material-symbols-outlined {
-  transform: translateY(3px);
-}
-
-.hero .section-arrow .material-symbols-outlined {
-  color: var(--color-white);
-}
-
-/* ===== Material Icons ===== */
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 48px;
-  display: inline-block;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-}
-
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
-  font-size: 48px;
-  display: inline-block;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-smoothing: antialiased;
-}
+// Legacy support - import existing CSS files temporarily
+@import '../styles/components/hero.css';
+@import '../styles/components/content-card.css';
+@import '../styles/components/core-values.css';
+@import '../styles/components/wave-section.css';
+@import '../styles/components/footer.css';
